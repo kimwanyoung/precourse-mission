@@ -10,12 +10,19 @@ public class BaseballNumbers {
 
     public BaseballNumbers(List<Integer> baseballNumbers) {
         validateDuplicate(baseballNumbers);
+        validateLength(baseballNumbers);
         this.baseballNumbers = baseballNumbers;
     }
 
     private void validateDuplicate(List<Integer> baseballNumbers) {
         Set<Integer> baseballNumberChecker = new HashSet<>(baseballNumbers);
-        if(baseballNumberChecker.size() != 3) {
+        if (baseballNumberChecker.size() != 3) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateLength(List<Integer> baseballNumbers) {
+        if (baseballNumbers.size() != 3) {
             throw new IllegalArgumentException();
         }
     }

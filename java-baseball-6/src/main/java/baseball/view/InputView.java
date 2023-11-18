@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private Reader reader;
-    private Printer printer;
+    private final Reader reader;
+    private final Printer printer;
 
     public InputView(Reader reader, Printer printer) {
         this.reader = reader;
