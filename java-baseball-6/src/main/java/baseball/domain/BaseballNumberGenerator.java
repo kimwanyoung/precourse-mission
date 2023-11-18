@@ -15,6 +15,7 @@ public class BaseballNumberGenerator implements RandomGenerator {
                 randomNumbers.add(randomNumber);
             }
         }
+        System.out.println(randomNumbers);
         return randomNumbers;
     }
 }

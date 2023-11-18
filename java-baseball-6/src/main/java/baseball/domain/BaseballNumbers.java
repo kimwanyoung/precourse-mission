@@ -32,7 +32,7 @@ public class BaseballNumbers {
             int currentBaseballNumber = baseballNumbers.get(i);
             int currentOtherBaseballNumber = otherBaseballNumbers.baseballNumbers.get(i);
             if (currentBaseballNumber != currentOtherBaseballNumber &&
-                    otherBaseballNumbers.contains(currentOtherBaseballNumber)) {
+                    baseballNumbers.contains(currentOtherBaseballNumber)) {
                 ball++;
             }
         }

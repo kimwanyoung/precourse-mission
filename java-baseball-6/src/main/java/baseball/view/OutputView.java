@@ -26,5 +26,6 @@ public class OutputView {
         if (score > 0) {
             return score + scoreKey;
         }
+        return "";
     }
 }
