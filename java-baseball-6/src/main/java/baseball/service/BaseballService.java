@@ -3,6 +3,7 @@ package baseball.service;
 import baseball.domain.BaseballNumberRandomGenerator;
 import baseball.domain.BaseballNumbers;
 import baseball.domain.GameScoreDto;
+import java.util.List;
 
 public class BaseballService {
 
@@ -14,8 +15,8 @@ public class BaseballService {
         this.baseballNumberRandomGenerator = baseballNumberRandomGenerator;
     }
 
-    public GameScoreDto play(BaseballNumbers userBaseballNumbers) {
-        user = userBaseballNumbers;
+    public GameScoreDto play(List<Integer> userBaseballNumbers) {
+        user = new BaseballNumbers(userBaseballNumbers);
         return computer.calculateScore(user);
     }
 
