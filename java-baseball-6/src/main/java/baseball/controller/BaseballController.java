@@ -1,40 +1,46 @@
 package baseball.controller;
 
-import baseball.domain.RandomGenerator;
+import baseball.domain.GameScoreDto;
+import baseball.domain.UserChoice;
 import baseball.service.BaseballService;
 import baseball.view.InputView;
 import baseball.view.OutputView;
-import java.util.List;
-import java.util.Map;
 
 public class BaseballController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final RandomGenerator randomGenerator;
     private final BaseballService baseballService;
 
     public BaseballController(
             InputView inputView,
             OutputView outputView,
-            BaseballService baseballService,
-            RandomGenerator randomGenerator
+            BaseballService baseballService
     ) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.baseballService = baseballService;
-        this.randomGenerator = randomGenerator;
     }
 
     public void run() {
-        List<Integer> computerBaseballs = randomGenerator.generate();
-        baseballService.generateComputerBaseballNumbers(computerBaseballs);
-
+        baseballService.reset();
         do {
-            List<Integer> userBaseball = inputView.getBaseballNumberFromInput();
-            baseballService.generateUserBaseballNumbers(userBaseball);
-            Map<String, Integer> result = baseballService.calculateBaseballStatistics();
+            GameScoreDto result = baseballService.play(inputView.getBaseballNumberFromInput());
             outputView.displayBaseballResult(result);
         } while (!baseballService.isThreeStrike());
+
+        retryOrQuit();
+    }
+
+    private void retryOrQuit() {
+        UserChoice userChoice = UserChoice.RETRY;
+        while (userChoice != UserChoice.QUIT) {
+            userChoice = UserChoice.from(inputView.getUserChoice());
+            if (userChoice.equals(UserChoice.RETRY)) {
+                run();
+                return;
+            }
+        }
+        outputView.displayGameOver();
     }
 }

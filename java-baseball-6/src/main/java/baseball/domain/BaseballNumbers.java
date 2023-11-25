@@ -14,7 +14,13 @@ public class BaseballNumbers {
         this.baseballNumbers = baseballNumbers;
     }
 
-    public int calculateStrike(BaseballNumbers otherBaseballNumbers) {
+    public GameScoreDto calculateScore(BaseballNumbers otherBaseballNumbers) {
+        int strike = calculateStrike(otherBaseballNumbers);
+        int ball = calculateContains(otherBaseballNumbers) - strike;
+        return new GameScoreDto(strike, ball);
+    }
+
+    private int calculateStrike(BaseballNumbers otherBaseballNumbers) {
         int strike = 0;
         for (int i = 0; i < baseballNumbers.size(); i++) {
             int currentBaseballNumber = baseballNumbers.get(i);
@@ -26,21 +32,15 @@ public class BaseballNumbers {
         return strike;
     }
 
-    public int calculateBall(BaseballNumbers otherBaseballNumbers) {
-        int ball = 0;
+    private int calculateContains(BaseballNumbers otherBaseballNumbers) {
+        int counts = 0;
         for (int i = 0; i < baseballNumbers.size(); i++) {
-            int currentBaseballNumber = baseballNumbers.get(i);
             int currentOtherBaseballNumber = otherBaseballNumbers.baseballNumbers.get(i);
-            if (currentBaseballNumber != currentOtherBaseballNumber &&
-                    baseballNumbers.contains(currentOtherBaseballNumber)) {
-                ball++;
+            if (baseballNumbers.contains(currentOtherBaseballNumber)) {
+                counts++;
             }
         }
-        return ball;
-    }
-
-    private boolean contains(Integer baseballNumber) {
-        return baseballNumbers.contains(baseballNumber);
+        return counts;
     }
 
     private void validateDuplicate(List<Integer> baseballNumbers) {

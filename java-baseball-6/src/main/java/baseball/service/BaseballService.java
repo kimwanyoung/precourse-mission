@@ -1,29 +1,38 @@
 package baseball.service;
 
+import baseball.domain.BaseballNumberRandomGenerator;
 import baseball.domain.BaseballNumbers;
-import baseball.domain.BaseballPlayer;
-import java.util.List;
-import java.util.Map;
+import baseball.domain.GameScoreDto;
 
 public class BaseballService {
 
-    private BaseballPlayer user;
-    private BaseballPlayer computer;
+    private BaseballNumbers user;
+    private BaseballNumbers computer;
+    private final BaseballNumberRandomGenerator baseballNumberRandomGenerator;
 
-    public void generateComputerBaseballNumbers(List<Integer> computerBaseballNumbers) {
-        computer = new BaseballPlayer(new BaseballNumbers(computerBaseballNumbers));
+    public BaseballService(BaseballNumberRandomGenerator baseballNumberRandomGenerator) {
+        this.baseballNumberRandomGenerator = baseballNumberRandomGenerator;
     }
 
-    public void generateUserBaseballNumbers(List<Integer> userBaseballNumbers) {
-        user = new BaseballPlayer(new BaseballNumbers(userBaseballNumbers));
+    public GameScoreDto play(BaseballNumbers userBaseballNumbers) {
+        user = userBaseballNumbers;
+        return computer.calculateScore(user);
     }
 
-    public Map<String, Integer> calculateBaseballStatistics() {
-        return computer.calculateBaseballResult(user);
+    public void reset() {
+        computer = baseballNumberRandomGenerator.generate();
+        user = null;
     }
 
     public boolean isThreeStrike() {
-        Map<String, Integer> currentStatistics = computer.calculateBaseballResult(user);
-        return currentStatistics.getOrDefault("스트라이크", 0) == 3;
+        if (isNotInitialized()) {
+            return false;
+        }
+        GameScoreDto currentStatistics = computer.calculateScore(user);
+        return currentStatistics.strike() == 3;
+    }
+
+    private boolean isNotInitialized() {
+        return user == null || computer == null;
     }
 }
