@@ -18,7 +18,7 @@ public class OutputView {
             return;
         }
         String strikeFormat = calculateResultFormat(strike, "스트라이크");
-        String ballFormat = calculateResultFormat(ball, "볼");
+        String ballFormat = calculateResultFormat(ball, "볼 ");
         printer.println(ballFormat + strikeFormat);
     }
 
@@ -28,7 +28,7 @@ public class OutputView {
 
     private String calculateResultFormat(int score, String scoreKey) {
         if (score > 0) {
-            return score + scoreKey + " ";
+            return score + scoreKey;
         }
         return "";
     }
