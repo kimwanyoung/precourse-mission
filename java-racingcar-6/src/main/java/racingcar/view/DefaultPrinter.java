@@ -13,4 +13,9 @@ public class DefaultPrinter implements Printer {
     public void println(String message) {
         System.out.println(message);
     }
+
+    @Override
+    public void println() {
+        System.out.println();
+    }
 }

@@ -6,4 +6,5 @@ public interface Printer {
 
     void printf(String message, Object... args);
     void println(String message);
+    void println();
 }
