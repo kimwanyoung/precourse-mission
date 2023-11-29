@@ -10,7 +10,7 @@ public class DefaultPrinter implements Printer {
     }
 
     @Override
-    public void println(String message) {
+    public void println(Object message) {
         System.out.println(message);
     }
 

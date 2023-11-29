@@ -27,6 +27,7 @@ public class RacingController {
         int attempts = inputView.attempts();
         racingService.generateCars(names);
         raceMultipleTimes(attempts);
+        outputView.displayFinalWinner(racingService.calculateRacingResult());
     }
 
     private void raceMultipleTimes(int attempts) {
