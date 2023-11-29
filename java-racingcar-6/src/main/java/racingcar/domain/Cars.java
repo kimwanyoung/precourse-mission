@@ -1,6 +1,8 @@
 package racingcar.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Cars {
 
@@ -17,5 +19,14 @@ public class Cars {
             int racingNumber = racingNumberGenerator.getRacingNumber();
             car.move(racingNumber);
         }
+    }
+
+    public RacingResultDto toRacingResultDto() {
+        Map<String, Integer> results = new HashMap<>();
+        for(Car car : cars) {
+            RacingCarDto racingCarDto = car.toRacingCarDto();
+            results.put(racingCarDto.name(), racingCarDto.racingMoveForwardTimes());
+        }
+        return new RacingResultDto(results);
     }
 }

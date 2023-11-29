@@ -10,6 +10,10 @@ public class Name {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     private void validateLength(String name) {
         if(name.length() > MAX_LENGTH) {
             throw new IllegalArgumentException();

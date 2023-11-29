@@ -11,8 +11,12 @@ public class Car {
     }
 
     public void move(int racingNumber) {
-        if(racingNumber >= 4) {
+        if (racingNumber >= 4) {
             moveForwardTimes.move();
         }
+    }
+
+    public RacingCarDto toRacingCarDto() {
+        return new RacingCarDto(name.getName(), moveForwardTimes.getMoveForwardTimes());
     }
 }

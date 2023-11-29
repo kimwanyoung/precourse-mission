@@ -11,4 +11,8 @@ public class MoveForwardTimes {
     public void move() {
         moveForwardTimes += 1;
     }
+
+    public int getMoveForwardTimes() {
+        return moveForwardTimes;
+    }
 }
